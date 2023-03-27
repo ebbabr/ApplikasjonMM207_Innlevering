@@ -7,6 +7,9 @@
     <title>Login or create user</title>
     
   </head>
+  <body style="background-color:lightgrey;"></body>
+
+  <button id = 'backwards' class="buttonClass">Back</button>
 
     <header class="center">
       <h1>Create user or Log in</h1>
@@ -33,6 +36,11 @@
         let btnShow = document.getElementById("btnShow");
         let txtResult = document.getElementById("txtResult");
         let btnCreateUser = document.getElementById('btnCreateUser')
+        let backwardsBtn = document.getElementById('backwards');
+        
+        backwardsBtn.addEventListener('click', function(evt){
+            location.href = 'index.html';
+        })
 
 
         window.onload = function () {

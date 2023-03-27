@@ -8,7 +8,10 @@
 </head>
 <body>
 <body style="background-color:lightgrey;">
-
+ 
+  <button id = 'backwards' class="buttonClass">Back</button>
+  <br>
+  <br>
     <label for = "event"> Your event ID: </label>
     <input id = "event" type = "text" readonly>
     <br>
@@ -60,6 +63,12 @@
     
 
 <script>
+
+let backwardsBtn = document.getElementById('backwards');
+        
+        backwardsBtn.addEventListener('click', function(evt){
+            location.href = 'index.html';
+        })
 
 
 
