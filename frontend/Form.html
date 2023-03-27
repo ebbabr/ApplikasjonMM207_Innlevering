@@ -7,9 +7,11 @@
 
 <body>
 
+    <button id = 'backwards' class="buttonClass">Back</button>
+
     <div container id="placeHere" class="placeHere">
         <input id="inputUsername" type="text" placeholder="Name" />
-        <input id="inputArranement" type="text" placeholder="event ID" />
+        <input id="inputEvent" type="text" placeholder="event ID" />
         <br>
         <br>
         <label>How many guest are filling out this form</label>
@@ -38,8 +40,14 @@
         let myAllergy = document.getElementById ('myAllergy');
         let myList = document.getElementById ('myList');
         let devider = document.createElement('li');
+        let backwardsBtn = document.getElementById('backwards');
+        
+        backwardsBtn.addEventListener('click', function(evt){
+            location.href = 'index.html';
+        })
+        
 
-        let persons = [];
+        let person = [];
 
         function createAllergy (myAllergy){
             this.object = {
@@ -48,7 +56,7 @@
 
             };
 
-            persons.push (object);
+            person.push (object);
 
         }
 
@@ -58,14 +66,14 @@
             createAllergy (myAllergy.value);
 
 
-       for (let i = 0; i < persons.length; i++) {
+       for (let i = 0; i < person.length; i++) {
            
            
          
-           myList.appendChild(devider).innerHTML += ` ${persons[i].Allergy}`;
+           myList.appendChild(devider).innerHTML += ` ${person[i].Allergy}`;
            myList.innerHTML += ``;
 
-           persons = [];
+           person = [];
        
        }
            
@@ -75,80 +83,4 @@
     </script>
 </html>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create a task</title>
 
-</head>
-<body>
-    
-    <link rel="stylesheet" href="./style.css" />
-   
-
-    <button id = 'backwards' class="buttonClass">Back</button>
-    <header class= "center">
-        <h1>Add allergy or preferences</h1>
-   
-  </head>
-  <body>
-
-    
-
-    <input id="inpTasktext" placeholder="Add" type= "text" />
-    <button id="btnCreate" class="buttonClass" type="submit">+
-    </button><br />
-    <h3 id="txtResult"></h3>
-
-    
- </header>
-
-    <script>
-        let inpTasktext = document.getElementById("inpTasktext");
-        let btnCreate = document.getElementById("btnCreate");
-        let txtResult = document.getElementById("txtResult");
-        let backwardsBtn = document.getElementById('backwards');
-
-        backwardsBtn.addEventListener('click', function(evt){
-            location.href = 'index.html';
-        })
-
-        btnCreate.addEventListener("click", async function (evt) {
-            let url = "";
-
-            let listidFromLocalStorage = localStorage.getItem('list');
-            let token = localStorage.getItem('token');
-        
-
-            let updata = {
-                tasktext: inpTasktext.value,
-                listid: listidFromLocalStorage
-            };
-
-            let cfg = {
-                method: "POST",
-                headers: { "content-type": "application/json",
-                    "authorization": token},
-                body: JSON.stringify(updata),
-            };
-
-            try {
-                let response = await fetch(url, cfg);
-                let data = await response.json();
-
-            if (response.status != 200) {
-                throw data.error;
-            } else {
-                txtResult.innerHTML = data.msg;
-            }
-            }catch (error) {
-                console.log(error);
-                txtResult.innerHTML = "Something went wrong";
-            }
-        });
-    </script>
-  </body>
-</html> -->
