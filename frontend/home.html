@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Userlogin</title>
+    <link rel="stylesheet" href="style.css" />
+    
+  </head>
+  <body class="loginPage">
+    <header class="center">
+      <h1>Create user or Log in</h1>
+      <br />
+
+      <div container id="placeHere" class="placeHere">
+        <input id="inputUsername" type="text" placeholder="Username" />
+        <input id="inputPassword" type="text" placeholder="Password" />
+        <button id="btnShow" class="buttonClass">Show password</button>
+        <br />
+
+        <button id="btnLogin" class="buttonClass">Log in</button>
+        <button id="btnCreateUser" class="buttonClass">Create user</button>
+        <h3 id="txtResult"></h3>
+      </div>
+    </header>
+
+    <!------------- JavaScript --------------->
+
+    <script>
+        let inputUsername = document.getElementById("inputUsername");
+        let inputPassword = document.getElementById("inputPassword");
+        let btnLogin = document.getElementById("btnLogin");
+        let btnShow = document.getElementById("btnShow");
+        let txtResult = document.getElementById("txtResult");
+        let btnCreateUser = document.getElementById('btnCreateUser')
+
+
+        window.onload = function () {
+            let string = document.getElementById("inputPassword");
+            if (string.type === "password") {
+            string.type = "text";
+            } else {
+            string.type = "password";
+            }
+        };
+
+        btnShow.addEventListener("click", function () {
+            let string = document.getElementById("inputPassword");
+            if (string.type === "text") {
+            string.type = "password";
+            } else {
+                string.type = "text";
+            }
+        });
+
+
+
+        btnLogin.addEventListener("click", async function (evt) {
+            let url = "/users/login";
+            let credString = createCredentialString(
+                inputUsername.value,
+                inputPassword.value
+            );
+
+            let cfg = {
+                method: "POST",
+                headers: { authorization: credString },
+            };
+
+            try {
+                let response = await fetch(url, cfg);
+                let data = await response.json();
+
+                if (response.status != 200) {
+                    throw data.error;
+                }
+
+                txtResult.innerHTML = data.msg;
+                localStorage.setItem("token", data.token);
+                window.location.href = "/tasklist.html";
+
+            } catch (error) {
+                txtResult.innerHTML = error;
+            }
+        });
+
+
+        btnCreateUser.addEventListener("click", async function (evt) {
+            
+            if (inputUsername.value.includes(":")) {
+                txtResult.innerHTML = 'Username cannot include ":"';
+                return;
+            }
+
+            let username = inputUsername.value;
+            let password = inputPassword.value;
+
+            let url = "/users";
+            let credString = createCredentialString(username, password);
+
+            let cfg = {
+                method: "POST",
+                headers: { "authorization": credString },
+            };
+
+            try {
+                let response = await fetch(url, cfg);
+                let data = await response.json();
+
+                if (response.status != 200) {
+                    throw data.error;
+                }
+
+                txtResult.innerHTML = data.msg;
+
+            } catch (error) {
+                txtResult.innerHTML = error;
+                }
+            });
+
+
+        function createCredentialString(username, password) {
+            let combinedStr = username + ":" + password;
+            let b64Str = btoa(combinedStr);
+            return "basic" + b64Str;
+        }
+
+    </script>
+  </body>
+</html>

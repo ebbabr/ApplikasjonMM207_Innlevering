@@ -1,0 +1,189 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searchresult</title>
+</head>
+
+<body>
+
+    <div 
+    id="cont">
+    <button id = "myButton"> Home</button>
+    <h1> Kategorier </h1>
+
+    </div>   
+   
+
+    <script>
+    let container = document.getElementById('cont');    
+    let shoppingcart = JSON.parse(localStorage.getItem("sales"))
+    console.log(shoppingcart);
+    let url = `https://helseflora.herokuapp.com/plants?search=${myButton}&key=OWWRXZ12`;
+    let totalPris = 0;
+   
+
+    for (let plants of shoppingcart) {
+      let div = document.createElement("div")
+    let leggTil = document.createElement("button")
+    leggTil.innerHTML ="+"
+    let leggFra = document.createElement ("button")
+    leggFra.innerHTML ="-"
+    let deleteButton = document.createElement('button')
+    deleteButton.innerHTML = "Delete"
+    deleteButton.id = "deleteButton"
+
+      div.innerHTML += `<h4>Navn: ${plants.name} &nbsp &nbsp &nbsp &nbsp Plante nr: ${plants.id}</h4>
+                        <br>
+                        <p id=order >Bestilling: ${plants.order}</p>`
+                        div.appendChild(leggTil)
+                        div.appendChild(leggFra)
+      div.innerHTML += ` <br>
+                        <p>Pris: ${plants.price},-</p>
+                        <br>
+                        <p>Sammenlagt pris: ${plants.price * plants.order},-</p>
+                        <br>
+                        `;
+                        div.appendChild(deleteButton)
+
+        if (plants.stock===0) {
+        div.innerHTML += `
+
+                    <p> Forventet levering: ${plants.expected_shipped.slice(0, 10)}</p>
+                   `
+        }
+        totalPris += (plants.price * plants.order)
+
+      container.appendChild(div);
+
+
+      // leggTil.addEventListener('click', function(evt) {
+      //   console.log(evt);
+               
+      //                 });
+     
+      // leggFra.addEventListener('click', function(evt) {
+      //     console.log(evt);
+               
+      //                 });
+
+
+        deleteButton.addEventListener('click', function(evt) {
+        let plantId = evt.path[1].childNodes[0].innerHTML.slice(59,63) //vi finner ID-en til planta som ligger i diven og navigerer oss derfra frem til elementene inn i diven ved å gjøre det finner vi h4 elementet som har ID-en på planta vi har trykket på.
+        console.log(evt.path[1].childNodes[0].innerHTML.slice(59,63)); //vi slicer da vi kun ønsker plante nr, og ikke all annen tekst. slik gjenkjenner vi ID-en videre for å slette alt med samme ID.
+
+        console.log(shoppingcart);
+
+        for (let plants of shoppingcart) {  
+          if (plantId = plants.id) {
+            console.log(shoppingcart.indexOf(plants.id));
+
+           
+          }
+         
+         
+        }
+               
+                      });
+     
+    }
+   
+
+    let total = document.createElement("h2")
+    total.innerHTML = "Total sum : " + totalPris +",-"
+
+    let emptyButton = document.createElement("button")
+    emptyButton.id="emptyButton"
+    emptyButton.innerHTML = "Empty shoppingcart"
+
+    let checkOut = document.createElement("button")
+    checkOut.id="emptyButton"
+    checkOut.innerHTML ="Proceed to checkout"
+
+    container.appendChild(total);
+    container.appendChild(emptyButton);
+    container.appendChild(checkOut);
+   
+
+
+    myButton.addEventListener('click', function(evt) {
+                        window.history.back ();  
+                      });
+
+
+    emptyButton.addEventListener('click', function(evt) {
+        console.log(evt);
+               
+                      });
+    checkOut.addEventListener('click', function(evt) {
+      localStorage.setItem("Checkout", checkOut);
+      window.location.href = "Checkout.html";
+    });
+
+       
+    </script>
+
+    <style>
+
+* {
+        margin: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+     
+
+      #cont > div {
+     
+        color: bisque;
+        border-bottom: 1px solid wheat;
+        padding: 25px
+       
+      }
+
+      header{
+        background-color: rgb(18, 39, 18);
+        color: yellowgreen;
+        padding-left: 10px;
+        margin-bottom: 2px;
+       
+      }
+      h1, h2{
+        background-color: rgb(18, 39, 18);
+        color: bisque;
+        margin-bottom: 2px;
+        border-bottom: 1px solid wheat;
+        padding: 25px;
+      }
+   
+
+      button {
+          border-radius: 50%;
+          background: olive;
+       
+      }
+
+      #emptyButton{
+        border-radius: 0%;
+        background:wheat;
+        font-size: large;
+        margin-left: 30px;
+   
+       
+        }
+
+        #deleteButton{
+          border-radius: 15%;
+          background:wheat;
+        }
+
+      #cont {
+        background-color: rgb(18, 39, 18)
+      }
+
+
+    </style>
+
+</body>
+
+</html>
