@@ -14,7 +14,7 @@
       <br />
 
       <div container id="placeHere" class="placeHere">
-        <input id="inputUsername" type="text" placeholder="Username" />
+        <input id="inputName" type="text" placeholder="Username" />
         <input id="inputPassword" type="text" placeholder="Password" />
         <button id="btnShow" class="buttonClass">Show password</button>
         <br />
@@ -25,10 +25,10 @@
       </div>
     </header>
 
-    <!------------- JavaScript --------------->
+  
 
     <script>
-        let inputUsername = document.getElementById("inputUsername");
+        let inputName = document.getElementById("inputName");
         let inputPassword = document.getElementById("inputPassword");
         let btnLogin = document.getElementById("btnLogin");
         let btnShow = document.getElementById("btnShow");
@@ -57,15 +57,14 @@
 
 
         btnLogin.addEventListener("click", async function (evt) {
-            let url = "/users/login";
+            let url = "login.html";
             let credString = createCredentialString(
-                inputUsername.value,
+                inputName.value,
                 inputPassword.value
             );
 
             let cfg = {
                 method: "POST",
-                headers: { authorization: credString },
             };
 
             try {
@@ -76,9 +75,8 @@
                     throw data.error;
                 }
 
-                txtResult.innerHTML = data.msg;
-                localStorage.setItem("token", data.token);
-                window.location.href = "/tasklist.html";
+                window.location.href = "users.html"
+
 
             } catch (error) {
                 txtResult.innerHTML = error;
@@ -88,21 +86,13 @@
 
         btnCreateUser.addEventListener("click", async function (evt) {
             
-            if (inputUsername.value.includes(":")) {
-                txtResult.innerHTML = 'Username cannot include ":"';
-                return;
-            }
 
-            let username = inputUsername.value;
+            let username = inputName.value;
             let password = inputPassword.value;
 
-            let url = "/users";
-            let credString = createCredentialString(username, password);
+            let url = "users.html";
+        
 
-            let cfg = {
-                method: "POST",
-                headers: { "authorization": credString },
-            };
 
             try {
                 let response = await fetch(url, cfg);
@@ -119,12 +109,6 @@
                 }
             });
 
-
-        function createCredentialString(username, password) {
-            let combinedStr = username + ":" + password;
-            let b64Str = btoa(combinedStr);
-            return "basic" + b64Str;
-        }
 
     </script>
   </body>
