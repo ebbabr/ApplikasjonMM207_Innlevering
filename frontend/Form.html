@@ -33,7 +33,12 @@
 
     <script>
 
-let btnSend = document.getElementById('btnSend');
+        let myButton = document.getElementById ('myButton');
+        let myAllergy = document.getElementById ('myAllergy');
+        let myList = document.getElementById ('myList');
+        let devider = document.createElement('li');
+        let backwardsBtn = document.getElementById('backwards');
+        let btnSend = document.getElementById('btnSend');
   let inputs = document.querySelectorAll('input');
   console.log(inputs);
 
@@ -56,12 +61,6 @@ let btnSend = document.getElementById('btnSend');
 
     return response.json();
   }
-
-        let myButton = document.getElementById ('myButton');
-        let myAllergy = document.getElementById ('myAllergy');
-        let myList = document.getElementById ('myList');
-        let devider = document.createElement('li');
-        let backwardsBtn = document.getElementById('backwards');
         
         backwardsBtn.addEventListener('click', function(evt){
             location.href = 'index.html';
