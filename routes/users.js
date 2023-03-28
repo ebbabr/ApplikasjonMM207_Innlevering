@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const createHmac = crypto.createHmac;
 const usersRoute = express.Router();
 
+// fjern postgress link før levering
 const db = process.env.DATABASE_URL || "postgres://waexqbcrgulwst:c28aad2349a51663876cfd2013be1f0ee81868a556742f1bc50f0088714a7d37@ec2-52-215-68-14.eu-west-1.compute.amazonaws.com:5432/ddlonen5voojj7"; // dette er linken med database informasjon
 const credentials = {
     connectionString: db,

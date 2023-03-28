@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arrangement Plan</title>
+    <title>Event Planner</title>
 </head>
 
 <body style="background-color:lightgrey;">
@@ -25,27 +25,30 @@
     <div id="cont">
         <br>
         <br>
-        <h1> Arrangement Plan </h1>
+        <h1> Arrangement Planlegger </h1>
         <br>
     </div>   
     <br>
 
     <div class="btn-group">
 
-        <button id="create-event">Lag arrangement</button>
+        <button id="create-event">Opprett bruker</button>
         <button id="create-form">Fyll ut skjema</button>
         <img src="event.png" class="center" style="width: 500px;">
     </div>
 
 
-    <script>
-        var language = document.querySelector('input[name="language"]:checked').value;
-        if (language === "english") {
-            window.location.href = "english.html";
-        } else if (language === "norwegian") {
-            window.location.href = "norwegian.html";
-        }
-    </script>
+   	<script>
+		var radios = document.querySelectorAll('input[name="language"]');
+		radios.forEach(radio => radio.addEventListener('change', function() {
+			var language = document.querySelector('input[name="language"]:checked').value;
+			if (language === "english") {
+				window.location.href = "english.html";
+			} else if (language === "norwegian") {
+				window.location.href = "norwegian.html";
+			}
+		}));
+	</script>
     <script>
     
         const createeventButton = document.getElementById('create-event');
@@ -55,11 +58,11 @@
  
 
         createeventButton.addEventListener('click', () => {
-            window.location.href = 'Arrangement.html';
+            window.location.href = 'arrangement.html';
         });
 
         createFormButton.addEventListener('click', () => {
-            window.location.href = 'Skjema.html';
+            window.location.href = 'skjema.html';
         });
 
         goHomeButton.addEventListener('click', () => {

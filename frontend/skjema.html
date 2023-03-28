@@ -12,13 +12,13 @@
     <br>
     <br>
     <div container id="placeHere" class="placeHere">
-        <input id="inputUsername" type="text" placeholder="Navn" />
-        <input id="inputEvent" type="text" placeholder="Arrangement ID" />
+        <input id="inputUsername" type="text" name="userName" placeholder="Navn" />
+        <input id="inputEvent" type="text" name="eventID" placeholder="Arrangement ID" />
         <br>
         <br>
 
-    <label for = "myAllergy"> Skriv allergi eller preferanse </label>
-    <input id = "myAllergy" type = "text";>
+    <label for = "myAllergy"> Skriv allergi eller preferanse: </label>
+    <input id = "myAllergy" name = "allergy" type = "text";>
     <button id = "myButton"> Legg til </button>
     <h2 id = "text"></h2>
     <div id = "myList" ></div>
@@ -38,9 +38,32 @@
         let myList = document.getElementById ('myList');
         let devider = document.createElement('li');
         let backwardsBtn = document.getElementById('backwards');
+        let btnSend = document.getElementById('btnSend');
+  let inputs = document.querySelectorAll('input');
+  console.log(inputs);
+
+  const data = {};
+
+  btnSend.addEventListener('click', () => {
+    inputs.forEach((input) => {
+    data[input.attributes["name"].value] = input.value;
+  })
+
+  sendToServer(data);
+  })
+
+  async function sendToServer(data) {
+    const response = await fetch("/event", {
+      method: "POST",
+      headers: {"Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+
+    return response.json();
+  }
         
         backwardsBtn.addEventListener('click', function(evt){
-            location.href = 'index.html';
+            location.href = 'norwegian.html';
         })
         
 

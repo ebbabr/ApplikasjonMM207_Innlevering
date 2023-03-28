@@ -4,70 +4,97 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arrangement</title>
+    <title>Event</title>
 </head>
 <body>
 <body style="background-color:lightgrey;">
  
-  <button id = 'backwards' class="buttonClass">Tilbake</button>
+  <button id = 'backwards' class="buttonClass">tilbake</button>
   <br>
   <br>
-    <label for = "event"> Din arrangement ID: </label>
-    <input id = "event" type = "text" readonly>
+    <label for = "event"> Ditt arrangement ID: </label>
+    <input id = "event" name="eventID" type = "text" readonly>
     <br>
     <br>
     <div 
     id="cont">
     
-    <h1> Arrangement </h1>
+    <h1> Arangement </h1>
 
     </div>   
     <br>
     <span> Navn på arrangement: </span>
-    <input type = "text" id="myInput">
+    <input type = "text" name="eventName" id="myInput">
     <br>
     <br>
     <span> Navn på vert: </span>
-    <input type = "text" id="myInput">
+    <input type = "text" name="hostName" id="myInput">
     <br>
     <br>
     <label for="info">Litt informasjon om arrangemanget:</label>
     <br>
-    <textarea id="info"></textarea>
+    <textarea name = "info" id="info"></textarea>
     <br>
     <br>
     <span> Kleskode: </span>
-    <input type = "text" id="myInput">
+    <input type = "text" name = "dressCode" id="myInput">
     <br>
     <br>
     <span> Tid: </span>
-    <input type = "time" id="myInput">
+    <input type = "time" name = "time" id="myInput">
     <br>
     <br>
     <span> Adresse: </span>
-    <input type = "address" id="myInput">
+    <input type = "address" name = "Address" id="myInput">
     <br>
     <br>
     <span> Telefon: </span>
-    <input type = "number" id="myInput">
+    <input type = "number" name = "phone" id="myInput">
     <br>
     <br>
-    <button id="btnCreate" class="create">Opprett </button>
+    <button id="btnCreate" class="create">Opprett</button>
 
    
 
      </div> 
 
 
-
+    
     
 
 <script>
 
+  let submitBtn = document.getElementById('btnCreate');
+  let inputs = document.querySelectorAll('input');
+  console.log(inputs);
+
+  const data = {};
+
+  submitBtn.addEventListener('click', () => {
+    inputs.forEach((input) => {
+    data[input.attributes["name"].value] = input.value;
+  })
+
+  sendToServer(data);
+  })
+
+  async function sendToServer(data) {
+    const response = await fetch("/event", {
+      method: "POST",
+      headers: {"Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+
+    return response.json();
+  }
+
+ 
+  
+
 let backwardsBtn = document.getElementById('backwards');
         
         backwardsBtn.addEventListener('click', function(evt){
-            location.href = 'index.html';
+            location.href = 'norwegian.html';
         })
 
 
