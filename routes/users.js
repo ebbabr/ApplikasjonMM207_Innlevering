@@ -47,7 +47,7 @@ usersRoute.post('/login', async (req, res) => {
         results = await client.query(query, values);
 
         if (results.rowCount > 0) {
-            res.send({ id: results.rows[0].id, "Login": "Log in successfull"});
+            res.send({ id: results.rows[0].id, "Login": "successfull"});
         } else {
             res.status(401).send({ "Error": "Invalid username or password" })
         }
