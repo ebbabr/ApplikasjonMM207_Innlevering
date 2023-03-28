@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrangement Plan</title>
+</head>
+
+<body style="background-color:lightgrey;">
+    <header>
+      <button id="go-home"style="background-image: url('homme.png');"></button>
+    </header>
+
+    <body>
+        <form>
+            <input type="radio" id="english" name="language" value="english">
+            <label for="english">Engelsk</label><br>
+            <input type="radio" id="norwegian" name="language" value="norwegian">
+            <label for="norwegian">Norsk</label><br>
+        </form>
+    </body> 
+
+    <div id="container"></div>
+    <div id="cont">
+        <br>
+        <br>
+        <h1> Arrangement Plan </h1>
+        <br>
+    </div>   
+    <br>
+
+    <div class="btn-group">
+
+        <button id="create-event">Lag arrangement</button>
+        <button id="create-form">Fyll ut skjema</button>
+        <img src="Event.png" class="center" style="width: 500px;">
+    </div>
+
+
+    <script>
+        var language = document.querySelector('input[name="language"]:checked').value;
+        if (language === "english") {
+            window.location.href = "english.html";
+        } else if (language === "norwegian") {
+            window.location.href = "norwegian.html";
+        }
+    </script>
+    <script>
+    
+        const createeventButton = document.getElementById('create-event');
+        const createFormButton = document.getElementById('create-form');
+        const goHomeButton = document.getElementById('go-home');
+
+ 
+
+        createeventButton.addEventListener('click', () => {
+            window.location.href = 'Arrangement.html';
+        });
+
+        createFormButton.addEventListener('click', () => {
+            window.location.href = 'Skjema.html';
+        });
+
+        goHomeButton.addEventListener('click', () => {
+            window.location.href = 'hjem.html';
+        });
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+         
+        #cont > div {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            grid-template-rows: 30px 40px 30px;
+            grid-template-areas:
+              "im nm"
+              "im ds"
+              "im pr";
+            background-color: lightgray;
+            color: black;
+            cursor: pointer;
+            border-bottom: 2px lightskyblue dotted;
+        }
+    
+        h1 {
+            background-color: lightgrey;
+            color: black;
+            text-align: center;
+            margin-bottom: 2px;
+        }
+    
+        button {
+            height: 80px;
+            width: 200px;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    #go-home {
+      border-radius: 50%;
+      background-color: transparent;
+      background-size: cover;
+      height: 50px;
+      width: 50px;
+    }
+ 
+    
+        #create-event, #create-form {
+            background-color: skyblue;
+            border-radius: 0;
+        }
+    
+        #cont {
+            background-color: lightgray;
+        }
+    
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    
+        .btn-group button {
+            text-align: center;
+            background-color: lightskyblue; 
+            border: 1px solid lightgray; 
+            color: black; 
+            padding: 20px 100px; 
+            cursor:pointer; /* Pointer/hand icon */
+      width: 100%; /* Set a width if needed */
+      display: block; /* Make the buttons appear below each other */
+    }
+    
+    
+           
+    
+        </style>
+    
+</body>
+</html>
