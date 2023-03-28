@@ -11,6 +11,16 @@
     <header>
       <button id="go-home"style="background-image: url('homme.png');"></button>
     </header>
+
+    <body>
+        <form>
+            <input type="radio" id="english" name="language" value="english">
+            <label for="english">English</label><br>
+            <input type="radio" id="norwegian" name="language" value="norwegian">
+            <label for="norwegian">Norwegian</label><br>
+        </form>
+    </body> 
+
     <div id="container"></div>
     <div id="cont">
         <br>
@@ -27,7 +37,18 @@
         <img src="Event.png" class="center" style="width: 500px;">
     </div>
 
-    <script src="app.js"></script>
+
+   	<script>
+		var radios = document.querySelectorAll('input[name="language"]');
+		radios.forEach(radio => radio.addEventListener('change', function() {
+			var language = document.querySelector('input[name="language"]:checked').value;
+			if (language === "english") {
+				window.location.href = "english.html";
+			} else if (language === "norwegian") {
+				window.location.href = "norwegian.html";
+			}
+		}));
+	</script>
     <script>
     
         const createeventButton = document.getElementById('create-event');
