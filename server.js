@@ -5,30 +5,41 @@ const path = require('path');
 
 const app = express();
 
+app.use(express.json());
+
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'frontend')));
+/*
 
-// // Serve the index page for all other routes
-// app.get('*', (req, res) => {
-//   const indexFilePath = path.join(__dirname, 'frontend', 'index.html');
-//   res.sendFile(indexFilePath, err => {
-//     if (err) {
-//       console.error(`Error sending file: ${indexFilePath}`, err);
-//       res.status(err.status).end();
-//     }
-//   });
-// });
+app.post("user/" createUser);
+app.get("user/:id", getUser);
+app.delete("user/:id", deleteUser);*/
 
+app.post("/event", lagreEvent);
+app.get("event/:id", finnEvent);
+app.delete("event/:id",deleteEvent);
+app.put("event/:id", updateEvent);
 
-// // Serve event.js for /event.js route
-// app.get('/event.js', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'frontend', 'event.js'));
-// });
+function updateEvent(req,res,next){
+  const eventID = req.params.id;
+  const eventData = req.body;
+}
 
-// // Serve form.js for /form route
-// app.get('/form.js', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'frontend', 'form.js'));
-// });
+function deleteEvent(req,res,next){
+  const eventID = req.params.id;
+  // slete event med id eventid;
+}
+
+function lagreEvent(req,res,next){
+  // data ligger i req.body
+  console.log(req.body);
+}
+
+function finnEvent(req,res,next){
+  const eventID = req.params.id;
+  // returner event med id === eventID
+}
+
 
 // Start the server
 const port = process.env.PORT || 8080;
