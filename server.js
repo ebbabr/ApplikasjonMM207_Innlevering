@@ -1,14 +1,13 @@
-// import express from 'express'
-
 const express = require('express');
 const path = require('path');
-
+const usersRoute = require('./routes/users.js');
 const app = express();
 
 app.use(express.json());
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'frontend')));
+app.use('/users', usersRoute)
 /*
 
 app.post("user/" createUser);
