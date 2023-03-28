@@ -1,0 +1,81 @@
+<html>
+    <head>
+ 
+        <title></title>
+
+    </head>
+
+<body>
+    <body style="background-color:lightgrey;"></body>
+
+    <button id = 'backwards' class="buttonClass">Tilbake</button>
+    <br>
+    <br>
+    <div container id="placeHere" class="placeHere">
+        <input id="inputUsername" type="text" placeholder="Navn" />
+        <input id="inputEvent" type="text" placeholder="Arrangement ID" />
+        <br>
+        <br>
+
+    <label for = "myAllergy"> Skriv allergi eller preferanse </label>
+    <input id = "myAllergy" type = "text";>
+    <button id = "myButton"> Legg til </button>
+    <h2 id = "text"></h2>
+    <div id = "myList" ></div>
+
+    <br />
+    <br>
+
+    <button id="btnSend" class="sendIn">Send inn</button>
+    
+
+
+
+    <script>
+
+        let myButton = document.getElementById ('myButton');
+        let myAllergy = document.getElementById ('myAllergy');
+        let myList = document.getElementById ('myList');
+        let devider = document.createElement('li');
+        let backwardsBtn = document.getElementById('backwards');
+        
+        backwardsBtn.addEventListener('click', function(evt){
+            location.href = 'index.html';
+        })
+        
+
+        let person = [];
+
+        function createAllergy (myAllergy){
+            this.object = {
+                Allergy: myAllergy,
+               
+
+            };
+
+            person.push (object);
+
+        }
+
+
+        myButton.addEventListener('click', function(evt){
+
+            createAllergy (myAllergy.value);
+
+
+       for (let i = 0; i < person.length; i++) {
+           
+           
+         
+           myList.appendChild(devider).innerHTML += ` ${person[i].Allergy}`;
+           myList.innerHTML += ``;
+
+           person = [];
+       
+       }
+           
+       
+        });
+
+    </script>
+</html>

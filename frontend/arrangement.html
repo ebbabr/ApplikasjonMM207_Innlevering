@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrangement</title>
+</head>
+<body>
+<body style="background-color:lightgrey;">
+ 
+  <button id = 'backwards' class="buttonClass">Tilbake</button>
+  <br>
+  <br>
+    <label for = "event"> Din arrangement ID: </label>
+    <input id = "event" type = "text" readonly>
+    <br>
+    <br>
+    <div 
+    id="cont">
+    
+    <h1> Arrangement </h1>
+
+    </div>   
+    <br>
+    <span> Navn på arrangement: </span>
+    <input type = "text" id="myInput">
+    <br>
+    <br>
+    <span> Navn på vert: </span>
+    <input type = "text" id="myInput">
+    <br>
+    <br>
+    <label for="info">Litt informasjon om arrangemanget:</label>
+    <br>
+    <textarea id="info"></textarea>
+    <br>
+    <br>
+    <span> Kleskode: </span>
+    <input type = "text" id="myInput">
+    <br>
+    <br>
+    <span> Tid: </span>
+    <input type = "time" id="myInput">
+    <br>
+    <br>
+    <span> Adresse: </span>
+    <input type = "address" id="myInput">
+    <br>
+    <br>
+    <span> Telefon: </span>
+    <input type = "number" id="myInput">
+    <br>
+    <br>
+    <button id="btnCreate" class="create">Opprett </button>
+
+   
+
+     </div> 
+
+
+
+    
+
+<script>
+
+let backwardsBtn = document.getElementById('backwards');
+        
+        backwardsBtn.addEventListener('click', function(evt){
+            location.href = 'index.html';
+        })
+
+
+
+var event_ID = Math.floor(Math.random() * 90000) + 10000;
+  document.getElementById("event").value = event_ID;
+</script>
+    
+</body>
+</html>
